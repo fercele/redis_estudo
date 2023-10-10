@@ -1,0 +1,27 @@
+version: '3'
+services:
+  redis:
+    image: redis/redis-stack:7.2.0-v3
+    ports:
+      - '6379:6379' #RedisStackServer
+      - '8001:8001' #RedisInsight
+    volumes:
+      - ./data/:/data
+    env_file:
+      - ./esc_db/env.db
+  dbadmin:
+
+   depends_on:
+     - dbserver.esc
+   restart: always
+   ports:
+     - target: 8080
+       published: 8081
+       protocol: tcp
+       mode: host
+
+
+
+
+      
+  
